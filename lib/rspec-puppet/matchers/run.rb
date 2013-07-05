@@ -58,6 +58,21 @@ module RSpec::Puppet
         failure_message_generic(:should_not, func_obj)
       end
 
+      def description
+        message = "run"
+        if @params
+          message += " with parameters #{@params.inspect}"
+        end
+
+        if @expected_return
+          message += " and return #{@expected_return.inspect}"
+        end
+
+        if @expected_error
+          message += " and raise an error of class #{@expected_error}"
+        end
+      end
+
       private
       def failure_message_generic(type, func_obj)
         func_name = func_obj.name.gsub(/^function_/, '')
